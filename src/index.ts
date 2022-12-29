@@ -9,7 +9,7 @@ const port = 3000;
 // define a route handler for the default homepage
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send(
-    `<p style='color: blue; font-size: 16px'>Please enter url as follows:</p>
+    `<p style='color: blue; font-size: 16px'>Please enter url as:</p>
     <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>`
   );
 });

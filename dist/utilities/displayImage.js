@@ -57,11 +57,11 @@ var displayImages = function (req, res, next) { return __awaiter(void 0, void 0,
             case 1:
                 checkRequestStatus = _a.sent();
                 if (checkRequestStatus === 'No image name given') {
-                    res.write("<p style='color: red; font-size: 16px'>No image name given.</p>\n                <p>Please enter url as follows:</p>\n                <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
+                    res.write("<p style='color: red; font-size: 16px'>No image name given.</p>\n                <p>Please enter url as:</p>\n                <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
                     return [2 /*return*/];
                 }
                 else if (checkRequestStatus === 'No height or width given') {
-                    res.write("<p style='color: red; font-size: 16px'>No height or width given.</p>\n                <p>Please enter url as follows:</p>\n                <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
+                    res.write("<p style='color: red; font-size: 16px'>No height or width given.</p>\n                <p>Please enter url as:</p>\n                <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
                     return [2 /*return*/];
                 }
                 else if (checkRequestStatus === 'Image does not exist') {
@@ -74,19 +74,19 @@ var displayImages = function (req, res, next) { return __awaiter(void 0, void 0,
                 return [4 /*yield*/, (0, imageResizer_1.default)(filename, width, height)];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, fs_1.promises.readFile("resizeImages/".concat(filename, "-").concat(width, "x").concat(height))];
+                return [4 /*yield*/, fs_1.promises.readFile(process.cwd() + '/resizedImages/' + width + 'x' + height + filename)];
             case 4:
                 imageFile = _a.sent();
                 res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.write('<p style="color: green; font-size: 16px;">Image Resized</p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:imageFile/jpeg;base64,');
+                res.write('<p style="color: green; font-size: 16px;">Image Resized Successfully</p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:imageFile/jpeg;base64,');
                 res.write(Buffer.from(imageFile).toString('base64'));
                 res.end('"/>');
                 return [3 /*break*/, 7];
-            case 5: return [4 /*yield*/, fs_1.promises.readFile("resizeImages/".concat(filename, "-").concat(width, "x").concat(height))];
+            case 5: return [4 /*yield*/, fs_1.promises.readFile(process.cwd() + '/resizedImages/' + width + 'x' + height + filename)];
             case 6:
                 imageFile = _a.sent();
                 res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.write('<p style="color: green; font-size: 16px;">Image Resized</p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:imageFile/jpeg;base64,');
+                res.write('<p style="color: green; font-size: 16px;">Image Resized Successfully</p><img style="display: block; margin-left: auto; margin-right: auto;" src="data:imageFile/jpeg;base64,');
                 res.write(Buffer.from(imageFile).toString('base64'));
                 res.end('"/>');
                 _a.label = 7;

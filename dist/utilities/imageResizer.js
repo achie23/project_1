@@ -39,34 +39,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs_1 = require("fs");
 var sharp_1 = __importDefault(require("sharp"));
 var imageResizer = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
-    var fullImgPath, fullImages, imageFile, resizedImage, err_1;
+    var dir, image, resize_to, resizedImage, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
-                fullImgPath = JSON.stringify("/images/".concat(filename)).replace(/\\\\/g, '/');
-                return [4 /*yield*/, fs_1.promises.readdir(fullImgPath)];
-            case 1:
-                fullImages = _a.sent();
-                imageFile = fullImages.find(function (image) {
-                    image === "".concat(filename);
-                });
-                if (!imageFile) return [3 /*break*/, 3];
-                return [4 /*yield*/, (0, sharp_1.default)("images/".concat(filename))
+                _a.trys.push([0, 2, , 3]);
+                dir = process.cwd();
+                image = dir + '/images/' + filename;
+                resize_to = dir + '/resizedImages/' + width + 'x' + height + filename;
+                return [4 /*yield*/, (0, sharp_1.default)(image)
                         .resize(width, height, { fit: 'contain' })
-                        .toFile("resizedImages/".concat(filename, "-").concat(width, "x").concat(height))];
-            case 2:
+                        .toFile(resize_to)];
+            case 1:
                 resizedImage = _a.sent();
                 return [2 /*return*/, resizedImage];
-            case 3: return [3 /*break*/, 5];
-            case 4:
+            case 2:
                 err_1 = _a.sent();
                 console.log("An error occurred while resizing image. ".concat(err_1));
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

@@ -101,7 +101,7 @@ describe('imageResizer function test', function () {
     }); });
 });
 describe('cacheChecker function test', function () {
-    it('should return true when image is found in cached folder and the width & height are right', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should return true when image name is found in resizedImages folder and the width & height are right', function () { return __awaiter(void 0, void 0, void 0, function () {
         var testResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -113,50 +113,26 @@ describe('cacheChecker function test', function () {
             }
         });
     }); });
-    it('should return false when width & height are not right but image is found in cached folder', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should return false when width & height are right but image name is not found in resizedImages folder', function () { return __awaiter(void 0, void 0, void 0, function () {
         var testResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('fjord.jpg', 150, 200)];
+                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('test.jpg', 300, 300)];
                 case 1:
                     testResult = _a.sent();
-                    expect(testResult).toBe(false);
+                    expect(testResult).toBeFalsy();
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should return false when width & height are right but image is not found in cached folder', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('should return false when height & width are not right but image name is found in resizedImages folder', function () { return __awaiter(void 0, void 0, void 0, function () {
         var testResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('imageNotFound.jpg', 300, 300)];
+                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('fjord.jpg', 700, 700)];
                 case 1:
                     testResult = _a.sent();
-                    expect(testResult).toBe(false);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('should return false when height is not right but image is found in cached folder', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var testResult;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('fjord.jpg', 300, 200)];
-                case 1:
-                    testResult = _a.sent();
-                    expect(testResult).toBe(false);
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-    it('should return false when width is not right but image is found in cached folder', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var testResult;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, cacheChecker_1.default)('fjord.jpg', 150, 300)];
-                case 1:
-                    testResult = _a.sent();
-                    expect(testResult).toBe(false);
+                    expect(testResult).toBeFalsy();
                     return [2 /*return*/];
             }
         });

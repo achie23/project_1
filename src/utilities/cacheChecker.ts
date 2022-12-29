@@ -6,19 +6,16 @@ const cacheChecker = async (
   height: number
 ) => {
   try {
-    const resizedImgPath = `/resizedImages/${filename}`;
-    // eslint-disable-next-line quotes
-    const cachedImages = await fsPromises.readdir(resizedImgPath);
-    const image = cachedImages.find((image) => {
-      image === `${filename}-${width}x${height}`;
-    });
-    if (image) {
+    const resizedImgPath =
+      process.cwd() + '/resizedImages/' + width + 'x' + height + filename;
+    const cachedImages = await fsPromises.readFile(resizedImgPath);
+    if (cachedImages) {
       return true;
     } else {
       return false;
     }
   } catch (err) {
-    console.log(`An error occurred while resizing image: ${err}`);
+    console.log(`Cached image does not exist: ${err}`);
   }
 };
 

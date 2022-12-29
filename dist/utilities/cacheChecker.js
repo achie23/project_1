@@ -37,20 +37,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = require("fs");
+// import imageResizer from './imageResizer';
 var cacheChecker = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
-    var resizedImgPath, cachedImages, image, err_1;
+    var resizedImgPath, cachedImages, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                resizedImgPath = "/resizedImages/".concat(filename);
-                return [4 /*yield*/, fs_1.promises.readdir(resizedImgPath)];
+                resizedImgPath = process.cwd() + '/resizedImages/' + width + 'x' + height + filename;
+                return [4 /*yield*/, fs_1.promises.readFile(resizedImgPath)];
             case 1:
                 cachedImages = _a.sent();
-                image = cachedImages.find(function (image) {
-                    image === "".concat(filename, "-").concat(width, "x").concat(height);
-                });
-                if (image) {
+                if (cachedImages) {
                     return [2 /*return*/, true];
                 }
                 else {
@@ -59,7 +57,7 @@ var cacheChecker = function (filename, width, height) { return __awaiter(void 0,
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                console.log("An error occurred while resizing image: ".concat(err_1));
+                console.log("Cached image does not exist: ".concat(err_1));
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

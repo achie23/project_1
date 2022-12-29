@@ -35,34 +35,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var imageChecker_1 = __importDefault(require("./imageChecker"));
+var fs_1 = require("fs");
 var requestChecker = function (filename, width, height) { return __awaiter(void 0, void 0, void 0, function () {
-    var err_1;
+    var fullImgPath, imagePath, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 5, , 6]);
-                if (!!filename) return [3 /*break*/, 1];
-                return [2 /*return*/, 'No image name given'];
+                _a.trys.push([0, 2, , 3]);
+                fullImgPath = process.cwd() + '/images/' + filename;
+                return [4 /*yield*/, fs_1.promises.readFile(fullImgPath)];
             case 1:
-                if (!(!height || !width)) return [3 /*break*/, 2];
-                return [2 /*return*/, 'No height or width given'];
-            case 2: return [4 /*yield*/, (0, imageChecker_1.default)(filename)];
-            case 3:
-                if (!(_a.sent())) {
+                imagePath = _a.sent();
+                // url request checker
+                if (!filename) {
+                    return [2 /*return*/, 'No image name given'];
+                }
+                else if (!width || !height) {
+                    return [2 /*return*/, 'No height or width given'];
+                }
+                else if (!imagePath) {
                     return [2 /*return*/, 'Image does not exist'];
                 }
-                _a.label = 4;
-            case 4: return [2 /*return*/, 'Everything looks good!!!'];
-            case 5:
+                else {
+                    return [2 /*return*/, 'Everything looks good!!!'];
+                }
+                return [3 /*break*/, 3];
+            case 2:
                 err_1 = _a.sent();
                 console.log("An error occurred: ".concat(err_1));
-                return [3 /*break*/, 6];
-            case 6: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

@@ -11,7 +11,7 @@ var app = (0, express_1.default)();
 var port = 3000;
 // define a route handler for the default homepage
 app.get('/', function (req, res) {
-    res.send("<p style='color: blue; font-size: 16px'>Please enter url as follows:</p>\n    <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
+    res.send("<p style='color: blue; font-size: 16px'>Please enter url as:</p>\n    <p>http://localhost:{port}/api/resize?name={image-name.jpg}&width={new-width}&height={new-height}</p>");
 });
 app.use('/api', index_1.default);
 // start the express server
